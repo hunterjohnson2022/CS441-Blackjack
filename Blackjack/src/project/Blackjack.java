@@ -12,7 +12,7 @@ public class Blackjack {
 	       frame.setSize(300,300);
 	       JButton button = new JButton("Press");
 	       frame.getContentPane().add(button); // Adds Button to content pane of frame
-	       frame.setVisible(true);
+	       frame.setVisible(true); //tset
 	}
 
 }
