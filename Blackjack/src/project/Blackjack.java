@@ -25,9 +25,26 @@ public class Blackjack {
 	       welcomeLabel.setBounds(300, 0, 300, 150);
 	       menuFrame.getContentPane().add(welcomeLabel);
 	       
-	       JButton button = new JButton("Press");
-	       //menuFrame.getContentPane().add(button); // Adds Button to content pane of frame
-	       menuFrame.setVisible(true); //bro
+	       JLabel startChips = new JLabel();
+	       startChips.setIcon(new ImageIcon("images/start_chips.png"));
+	       startChips.setBounds(40, 150, 300, 300);
+	       menuFrame.getContentPane().add(startChips);
+	       
+	       JButton startButton = new JButton("Play Game");
+	       menuFrame.getContentPane().add(startButton);
+	       startButton.setBounds(400, 150, 300, 100);
+	       
+	       JButton howButton = new JButton("How to Play");
+	       menuFrame.getContentPane().add(howButton);
+	       howButton.setBounds(400, 300, 300, 100);
+	       menuFrame.setVisible(true); 
+	       howButton.addActionListener(new java.awt.event.ActionListener() {
+	            @Override
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                JOptionPane.showMessageDialog(menuFrame, "This is how you play");
+	            }
+	        });
+	       
 	}
 
 }
