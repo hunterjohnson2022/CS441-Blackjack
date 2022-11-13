@@ -2,5 +2,6 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="Blackjack/src"/>
+	<classpathentry kind="src" path="images"/>
 	<classpathentry kind="output" path="Blackjack/bin"/>
 </classpath>
