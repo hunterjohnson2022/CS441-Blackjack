@@ -1,6 +1,7 @@
 package project;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
@@ -65,8 +66,76 @@ public class Blackjack {
 	       gameFrame.setResizable(false);
 	       gameFrame.getContentPane().setBackground(new Color(53,101,77));
 	       gameFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+	       
+	       JLabel gameOnLabel = new JLabel("Game On!");
+	       gameOnLabel.setFont(new Font("Serif", Font.BOLD, 25));
+	       gameOnLabel.setForeground(Color.WHITE);
+	       gameOnLabel.setBounds(350, -50, 300, 150);
+	       gameFrame.getContentPane().add(gameOnLabel);
+	       
+	       JLabel player_card1 = new JLabel();
+	       player_card1.setIcon(new ImageIcon(new ImageIcon("images/card.png").getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT)));
+	       player_card1.setBounds(450, 275, 300, 300);
+	       gameFrame.getContentPane().add(player_card1);
+	       
+	       JLabel player_card2 = new JLabel();
+	       player_card2.setIcon(new ImageIcon(new ImageIcon("images/card.png").getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT)));
+	       player_card2.setBounds(600, 275, 300, 300);
+	       gameFrame.getContentPane().add(player_card2);
+	       
+	       JLabel dealer_card1 = new JLabel();
+	       dealer_card1.setIcon(new ImageIcon(new ImageIcon("images/card.png").getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT)));
+	       dealer_card1.setBounds(450, 0, 300, 300);
+	       gameFrame.getContentPane().add(dealer_card1);
+	       
+	       JLabel dealer_card2 = new JLabel();
+	       dealer_card2.setIcon(new ImageIcon(new ImageIcon("images/card.png").getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT)));
+	       dealer_card2.setBounds(600, 0, 300, 300);
+	       gameFrame.getContentPane().add(dealer_card2);
+	       
+	       JLabel dealerLabel = new JLabel("(Dealer)");
+	       dealerLabel.setFont(new Font("Serif", Font.BOLD, 15));
+	       dealerLabel.setForeground(Color.WHITE);
+	       dealerLabel.setBounds(750, 50, 300, 150);
+	       gameFrame.getContentPane().add(dealerLabel);
+	       
+	       JLabel youLabel = new JLabel("(You)");
+	       youLabel.setFont(new Font("Serif", Font.BOLD, 15));
+	       youLabel.setForeground(Color.WHITE);
+	       youLabel.setBounds(750, 350, 300, 150);
+	       gameFrame.getContentPane().add(youLabel);
+	      
+	       
+	       JLabel betLabel = new JLabel();
+	       betLabel.setFont(new Font("Serif", Font.BOLD, 50));
+	       betLabel.setForeground(Color.WHITE);
+	       betLabel.setBounds(100, 50, 300, 150);
+	       gameFrame.getContentPane().add(betLabel);
+	       
+	       JButton hitButton = new JButton("Hit");
+	       gameFrame.getContentPane().add(hitButton);
+	       hitButton.setBounds(100, 175, 150, 50);
+	       hitButton.addActionListener(new java.awt.event.ActionListener() {
+	            @Override
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	            	
+	            }
+	        });
+	       
+	       JButton stayButton = new JButton("Stay");
+	       gameFrame.getContentPane().add(stayButton);
+	       stayButton.setBounds(100, 250, 150, 50);
+	       stayButton.addActionListener(new java.awt.event.ActionListener() {
+	            @Override
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	            	
+	            }
+	        });
+	       
+	       
 	       gameFrame.setVisible(true);
 	       
+
 	       
 	       int betAmount = 50;
 	       JOptionPane optionPane = new JOptionPane();
@@ -77,7 +146,9 @@ public class Blackjack {
 	       JDialog dialog = optionPane.createDialog(gameFrame, "My Slider");
 	       dialog.setVisible(true);
 	       betAmount = (int) optionPane.getInputValue();
-	       System.out.println("Input: " + betAmount);
+	       betLabel.setText("Bet: " + betAmount);
+	       
+	       
 	}
 
 	//utility 
