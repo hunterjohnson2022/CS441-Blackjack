@@ -74,23 +74,23 @@ public class Blackjack {
 	       gameFrame.getContentPane().add(gameOnLabel);
 	       
 	       JLabel player_card1 = new JLabel();
-	       player_card1.setIcon(new ImageIcon(new ImageIcon("images/card.png").getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT)));
-	       player_card1.setBounds(450, 275, 300, 300);
+	       //player_card1.setIcon(new ImageIcon(new ImageIcon("images/card.png").getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT)));
+	       player_card1.setBounds(600, 275, 300, 300);
 	       gameFrame.getContentPane().add(player_card1);
 	       
 	       JLabel player_card2 = new JLabel();
-	       player_card2.setIcon(new ImageIcon(new ImageIcon("images/card.png").getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT)));
-	       player_card2.setBounds(600, 275, 300, 300);
+	       //player_card2.setIcon(new ImageIcon(new ImageIcon("images/card.png").getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT)));
+	       player_card2.setBounds(450, 275, 300, 300);
 	       gameFrame.getContentPane().add(player_card2);
 	       
 	       JLabel dealer_card1 = new JLabel();
 	       dealer_card1.setIcon(new ImageIcon(new ImageIcon("images/card.png").getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT)));
-	       dealer_card1.setBounds(450, 0, 300, 300);
+	       dealer_card1.setBounds(600, 0, 300, 300);
 	       gameFrame.getContentPane().add(dealer_card1);
 	       
 	       JLabel dealer_card2 = new JLabel();
 	       dealer_card2.setIcon(new ImageIcon(new ImageIcon("images/card.png").getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT)));
-	       dealer_card2.setBounds(600, 0, 300, 300);
+	       dealer_card2.setBounds(450, 0, 300, 300);
 	       gameFrame.getContentPane().add(dealer_card2);
 	       
 	       JLabel dealerLabel = new JLabel("(Dealer)");
@@ -148,7 +148,9 @@ public class Blackjack {
 	       betAmount = (int) optionPane.getInputValue();
 	       betLabel.setText("Bet: " + betAmount);
 	       
-	       
+	       Game game = new Game();
+	       player_card1.setText(game.getPlayerCard(0));
+	       player_card2.setText(game.getPlayerCard(1));
 	}
 
 	//utility 
