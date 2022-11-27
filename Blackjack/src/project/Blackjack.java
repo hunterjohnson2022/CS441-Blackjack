@@ -105,7 +105,7 @@ public class Blackjack {
 	       gameFrame.getContentPane().add(dealer_card1);
 	       
 	       JLabel dealer_card2 = new JLabel();
-	       //dealer_card2.setIcon(new ImageIcon(new ImageIcon("images/card.png").getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT)));
+	       dealer_card2.setIcon(new ImageIcon(new ImageIcon("images/facedown.png").getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT)));
 	       dealer_card2.setBounds(450, 0, 300, 300);
 	       gameFrame.getContentPane().add(dealer_card2);
 	       
@@ -147,11 +147,11 @@ public class Blackjack {
 	            	if(game.drawNewCard() == 1) {
 	            		hitCount++;
 	            		if(hitCount == 1)
-	            			player_card3.setText(game.getPlayerCard(2));
+	            			player_card3.setIcon(new ImageIcon(new ImageIcon("images/" + game.getPlayerCard(2) + ".png").getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT)));
 	            		else if (hitCount == 2)
-	            			player_card4.setText(game.getPlayerCard(3));
+	            			player_card4.setIcon(new ImageIcon(new ImageIcon("images/" + game.getPlayerCard(3) + ".png").getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT)));
 	            		else if (hitCount == 3)
-	            			player_card5.setText(game.getPlayerCard(4));
+	            			player_card5.setIcon(new ImageIcon(new ImageIcon("images/" + game.getPlayerCard(4) + ".png").getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT)));
 	            	} else {
 	            		int input = JOptionPane.showOptionDialog(null, 
 	            		"You Drew a " + game.getLatestCard() + " and your total score was " + game.getPlayerScore() + "\nYou lost $" + betAmount + " Game Over", 
@@ -176,13 +176,14 @@ public class Blackjack {
 	       stayButton.addActionListener(new java.awt.event.ActionListener() {
 	            @Override
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
-	            	System.out.println("the dealer was hiding a(n) " + game.getDealerCard(1));
-	            	game.winnerSelection();
+	            	String message = game.winnerSelection();
+	            	
+	            	if(message == "The Player wins.\n") {
 	            	
 	            	int input = JOptionPane.showOptionDialog(null, 
 		            		"The Dealer was hiding a(n) " + game.getDealerCard(1) + " and their total score was " + game.getDealerScore() + 
 		            		"\nYour total score was " + game.getPlayerScore() + 
-		            		"\n" + game.winnerSelection(), 
+		            		" " + game.winnerSelection() + "\n" + "You won $" + betAmount * 2, 
 		            		"Game Over!", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
 
 		            		if(input == JOptionPane.OK_OPTION)
@@ -192,6 +193,21 @@ public class Blackjack {
 		            		} else {
 		            			gameFrame.dispose();
 		            		}
+	            	} else {
+	            		int input = JOptionPane.showOptionDialog(null, 
+			            		"The Dealer was hiding a(n) " + game.getDealerCard(1) + " and their total score was " + game.getDealerScore() + 
+			            		"\nYour total score was " + game.getPlayerScore() + 
+			            		" " + game.winnerSelection(), 
+			            		"Game Over!", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+
+			            		if(input == JOptionPane.OK_OPTION)
+			            		{
+			            		    gameFrame.dispose();
+			            		    newGameWindow();
+			            		} else {
+			            			gameFrame.dispose();
+			            		}
+	            	}
 	            }
 	        });
 	       
@@ -211,10 +227,9 @@ public class Blackjack {
 	       betAmount = (int) optionPane.getInputValue();
 	       betLabel.setText("Bet: " + betAmount);
 	       
-	       player_card1.setText(game.getPlayerCard(0));
-	       player_card2.setText(game.getPlayerCard(1));
-	       dealer_card1.setText(game.getDealerCard(0));
-	       dealer_card2.setText("facedown");
+	       player_card1.setIcon(new ImageIcon(new ImageIcon("images/" + game.getPlayerCard(0) + ".png").getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT)));
+	       player_card2.setIcon(new ImageIcon(new ImageIcon("images/" + game.getPlayerCard(1) + ".png").getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT)));
+	       dealer_card1.setIcon(new ImageIcon(new ImageIcon("images/" + game.getDealerCard(0) + ".png").getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT)));
 	}
 
 	//utility 
