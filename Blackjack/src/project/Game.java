@@ -12,34 +12,12 @@ public class Game {
 	private ArrayList<String> dealerCards = new ArrayList<String>();
 	
 
-	public Game() {
-//        int playerScore = 0;
-//        int dealerScore = 0;
-//        char answer;
-//
-//        // Player's turn. Two cards are given to the Player.
-//        playerScore = playerCardsDistribution();
-//
-//        // Dealer's turn. Two cards are given to the Dealer: one face-up and one face-down.
-//        String [] tableScoreDealer = dealerCardsDistribution();
-//        String dealerFaceUpCard = tableScoreDealer[0];
-//        String dealerFaceDownCard = tableScoreDealer[1];
-//        dealerScore = Integer.parseInt(tableScoreDealer[2]);
-//
-//        // Player's turn: he decides if he continues or not.
-//        answer = askContinue();
-//
-//        // Until the player score is 21 or under, he can decide to ask for additional cards, one at a time.
-//        playerScore = newCardProcess(playerScore, answer);
-//
-//        // The Dealer's face-down card is revealed and he plays.
-//        dealerScore = endingProcess(playerScore, dealerScore, dealerFaceUpCard, dealerFaceDownCard);
-//
-//        // Winner selection.
-//        winnerSelection(playerScore, dealerScore); 
+	public Game() {      
 		
 		System.out.println("New Game");
-		playerScore = playerCardsDistribution();
+		playerCardsDistribution();
+		dealerCardsDistribution();
+       
 	}
 	
 	public String drawCard (String visibility) {
@@ -89,123 +67,76 @@ public class Game {
         return earnedPoints;
     }
 
-    public static Scanner input = new Scanner(System.in);
 
-    public int playerCardsDistribution() {
+    public void playerCardsDistribution() {
 
-    	int score = 0;
         System.out.println("Player's turn. Two cards are drawn.");
         String playerCard1 = drawCard("faceUp");
         playerCards.add(playerCard1);
-        score = assignPoints(playerScore, playerCard1);
+        playerScore += assignPoints(playerScore, playerCard1);
         String playerCard2 = drawCard("faceUp");
         playerCards.add(playerCard2);
-        score += assignPoints(playerScore, playerCard2);
-        System.out.println("The Player's score is " + score + ".\n");
-        return score;
+        playerScore += assignPoints(playerScore, playerCard2);
+        System.out.println("The Player's score is " + playerScore + ".\n");
     }
 
-    public String[] dealerCardsDistribution() {
+    public void dealerCardsDistribution() {
 
-        int dealerScore = 0;
         System.out.println("Dealer's turn. Two cards are drawn: one face-up and one face-down.");
         String dealerCardFaceUp = drawCard("faceUp");
-        dealerScore = assignPoints(dealerScore, dealerCardFaceUp);
+        dealerCards.add(dealerCardFaceUp);
+        dealerScore += assignPoints(dealerScore, dealerCardFaceUp);
         String dealerCardFaceDown = drawCard("faceDown");
-        System.out.println("The Dealer's score is " + dealerScore + ".\n");
-        String[] tab = new String[3];
-        tab[0] = dealerCardFaceUp;
-        tab[1] = dealerCardFaceDown;
-        tab[2] = String.valueOf(dealerScore);
-        return tab;
+        dealerCards.add(dealerCardFaceDown);
+        dealerScore += assignPoints(dealerScore, dealerCardFaceDown);
+        System.out.println("The Dealer's score is " + dealerScore + ".\n");  
     }
 
-    public char askContinue() {
+    public int drawNewCard() {
 
-        System.out.println("Would you like another card? y or n");
-        char continuePlayer = input.next().charAt(0);
-        System.out.println();
-        return continuePlayer;
-    }
-
-    public int drawNewCard(int score) {
-
-        int playerScore = score;
         String newCard = drawCard("faceUp");
-        int earnedPoints = assignPoints(playerScore, newCard);
-        playerScore += earnedPoints;
+        playerCards.add(newCard);
+        playerScore += assignPoints(playerScore, newCard);
         System.out.println("The new score is " + playerScore + ".");
-        return playerScore;
+        return (playerScore > 21)? 0 : 1;    
     }
 
-    public int newCardProcess(int score, char answer) {
 
-        int currentScore = score;   
-        while ( currentScore <= 21 && answer == 'y' ) {
-            currentScore = drawNewCard(currentScore);
-            if ( currentScore > 21) {
-                System.out.println("The Player loses.");
-                System.out.println();
-            } else if ( currentScore == 21 ) {
-                System.out.println("The Player's score reaches 21.");
-                System.out.println();
-            } else {
-                answer = askContinue();
-            }
+
+    public String winnerSelection() {
+
+        if ((playerScore > 21 || playerScore < dealerScore) && (dealerScore < 22)) {
+
+            return "The Dealer wins.\n";
+        } else if ((dealerScore > 21 || playerScore > dealerScore) && (playerScore < 22)) {
+
+            return "The Player wins.\n";
+        } else if ((playerScore == dealerScore) && (playerScore < 22) && (dealerScore < 22)) {
+
+            return "Draw!";
         }
-        System.out.println("The Player's final score is " + currentScore + ".");
-        return currentScore;
-    }
-
-    public int endingProcess(int playerScore, int dealerScore, String faceUpCard, String faceDownCard) {
-
-        int newDealerScore = dealerScore;
-        if (playerScore <= 21) {
-
-            System.out.println("\nThe Dealer's face-up card was " + faceUpCard + ".");
-            System.out.println("The Dealer's face-down card is revealed: it's a " + faceDownCard + ".");
-            int faceDownCardPoints = assignPoints (dealerScore, faceDownCard);
-            newDealerScore = dealerScore + faceDownCardPoints;
-            System.out.println("His score is " + newDealerScore + ".\n");
-            while (newDealerScore < 17 ) {
-
-                newDealerScore = drawNewCard(newDealerScore);
-                if (newDealerScore > 21) {
-
-                    System.out.println("The dealer loses.");
-                } else if ( newDealerScore == 21 ) {
-
-                    System.out.println("The Dealer's score reaches 21.");
-                } else {
-
-                    System.out.println("The new Dealer's score is " + newDealerScore + ".");
-                }
-            }
-        }
-        System.out.println();
-        return newDealerScore;
-    }
-
-    public void winnerSelection(int score1, int score2) {
-
-        if ((score1 > 21 || score1 < score2) && (score2 < 22)) {
-
-            System.out.println("The Dealer wins.\n");
-        } else if ((score2 > 21 || score1 > score2) && (score1 < 22)) {
-
-            System.out.println("The Player wins.\n");
-        } else if ((score1 == score2) && (score1 < 22) && (score2 < 22)) {
-
-            System.out.println("The Player and the Dealer are ex aequo.\n");
-        }
+        
+        return "Draw!";
     }
     
     public int getPlayerScore() {
     	return playerScore;
     }
     
+    public int getDealerScore() {
+    	return dealerScore;
+    }
+    
     public String getPlayerCard(int index) {
     	return playerCards.get(index);
+    }
+    
+    public String getLatestCard() {
+    	return playerCards.get(playerCards.size() - 1);
+    }
+    
+    public String getDealerCard(int index) {
+    	return dealerCards.get(index);
     }
     
     
