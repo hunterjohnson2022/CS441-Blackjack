@@ -189,7 +189,7 @@ public class Blackjack {
 	            	if(message == "The Player wins.\n") {
 
 	            	int input = JOptionPane.showOptionDialog(null,
-		            		"The Dealer was hiding a(n) " + game.getDealerCard(1) + " and their total score was " + game.getDealerScore() +
+		            		"The Dealer was hiding a(n) " + game.getDealerCard(1) + " and the total score was " + game.getDealerScore() +
 		            		"\nYour total score was " + game.getPlayerScore() +
 		            		" " + game.winnerSelection() + "\n" + "You won $" + betAmount * 2,
 		            		"Game Over!", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
