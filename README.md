@@ -11,3 +11,5 @@ Choosing to "HIT" will draw another card which can put the player closer to 21 t
 to exceed 21 and immediately lose.
 
 Choosing "STAY" will end the game and either the player or dealer will win. 
+
+The inital bet is doubled on a win and all money is lost on a loss
