@@ -22,7 +22,10 @@ public class Blackjack {
 		startMenu();
 	}
 
+	//GUI for the initial start menu game screen
 	public static void startMenu() {
+		
+		//initial Jframe
 		JFrame menuFrame = new JFrame("Blackjack");
 	       menuFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	       menuFrame.setSize(900,600);
@@ -50,7 +53,7 @@ public class Blackjack {
 	            @Override
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
 	            	menuFrame.dispose();
-	                newGameWindow();
+	                newGameWindow();//switch to the game window when start button pressed
 	            }
 	        });
 
@@ -67,7 +70,10 @@ public class Blackjack {
 
 	}
 
+	//GUI settings for the game window
 	public static void newGameWindow() {
+		
+		//game windows jframe
 		JFrame gameFrame = new JFrame("Blackjack");
 	       gameFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	       gameFrame.setSize(900,600);
@@ -154,13 +160,13 @@ public class Blackjack {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
 	            	if(game.drawNewCard() == 1) {
 	            		hitCount++;
-	            		if(hitCount == 1)
+	            		if(hitCount == 1)//the game is still going so assign the card to the correct label
 	            			player_card3.setIcon(new ImageIcon(new ImageIcon("images/" + game.getPlayerCard(2) + ".png").getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT)));
 	            		else if (hitCount == 2)
 	            			player_card4.setIcon(new ImageIcon(new ImageIcon("images/" + game.getPlayerCard(3) + ".png").getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT)));
 	            		else if (hitCount == 3)
 	            			player_card5.setIcon(new ImageIcon(new ImageIcon("images/" + game.getPlayerCard(4) + ".png").getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT)));
-	            	} else {
+	            	} else { //the player exceeded 21
 	            		int input = JOptionPane.showOptionDialog(null,
 	            		"You Drew a " + game.getLatestCard() + " and your total score was " + game.getPlayerScore() + "\nYou lost $" + betAmount + " Game Over",
 	            		"BUST!", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
@@ -168,7 +174,7 @@ public class Blackjack {
 	            		if(input == JOptionPane.OK_OPTION)
 	            		{
 	            		    gameFrame.dispose();
-	            		    newGameWindow();
+	            		    newGameWindow();//create a new game
 	            		} else {
 	            			gameFrame.dispose();
 	            		}

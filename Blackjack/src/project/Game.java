@@ -7,6 +7,7 @@ public class Game {
 
 	private int playerScore = 0;
 	private int dealerScore = 0;
+	//stores cards dealt to the player and dealer
 	private ArrayList<String> playerCards = new ArrayList<>();
 	private ArrayList<String> dealerCards = new ArrayList<>();
 
@@ -14,11 +15,12 @@ public class Game {
 	public Game() {
 
 		System.out.println("New Game");
-		playerCardsDistribution();
-		dealerCardsDistribution();
+		playerCardsDistribution(); //deal cards to player
+		dealerCardsDistribution(); //deal cards to dealer
 
 	}
 
+	//randomly chooses a card to draw 
 	public String drawCard (String visibility) {
 
         String cards[] = {"Ace","2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
@@ -28,6 +30,7 @@ public class Game {
         return drawnCard;
     }
 
+	//distribute points based on the card
     public static int assignPoints (int score, String card) {
 
         int earnedPoints = 0;
@@ -53,7 +56,7 @@ public class Game {
         return earnedPoints;
     }
 
-
+    //fills up player cards arraylist
     public void playerCardsDistribution() {
 
 
@@ -66,6 +69,7 @@ public class Game {
 
     }
 
+    //fills up dealer cards arraylist
     public void dealerCardsDistribution() {
 
 
@@ -78,6 +82,7 @@ public class Game {
 
     }
 
+    //draws a new card and decides if the game is over or not
     public int drawNewCard() {
 
         String newCard = drawCard("faceUp");
@@ -88,7 +93,7 @@ public class Game {
     }
 
 
-
+    //decides winner based on dealer and player score
     public String winnerSelection() {
 
         if ((playerScore > 21 || playerScore < dealerScore) && (dealerScore < 22)) {
